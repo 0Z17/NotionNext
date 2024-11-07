@@ -38,7 +38,18 @@ const Slug = props => {
       return false
     }
     const encrypt = md5(post?.slug + passInput)
-    if (passInput && encrypt === post?.password) {
+    // if (passInput && encrypt === post?.password) {
+    //   setLock(false)
+    //   // 输入密码存入localStorage，下次自动提交
+    //   localStorage.setItem('password_' + router.asPath, passInput)
+    //   showNotification(locale.COMMON.ARTICLE_UNLOCK_TIPS) // 设置解锁成功提示显示
+    //   return true
+    // }
+
+
+    const passwordArray = Array.isArray(post.password) ? post.password : [post.password];
+
+    if (passInput && passwordArray.includes(encrypt)) {
       setLock(false)
       // 输入密码存入localStorage，下次自动提交
       localStorage.setItem('password_' + router.asPath, passInput)
